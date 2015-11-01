@@ -19,15 +19,27 @@
        <mvc:annotation-driven />
 
 
-       <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-              <property name="prefix">
-                     <value>/WEB-INF/views/jsp/</value>
-              </property>
-              <property name="suffix">
-                     <value>.jsp</value>
-              </property>
-       </bean>
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.tiles2.TilesViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
+    </bean>
+    <bean id="tilesConfigurer"
+          class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
 
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="defaultLocale" value="en_US"/>
+    </bean>
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    </bean>
+
 
 </beans>
