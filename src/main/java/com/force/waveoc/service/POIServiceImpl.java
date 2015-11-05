@@ -76,6 +76,17 @@ public class POIServiceImpl implements POIService {
                                 Date date = DateUtil.getJavaDate(dv);
                                 String dateFmt = cell.getCellStyle().getDataFormatString();
                                 String strValue = new CellDateFormatter(dateFmt).format(date);
+
+                                // delete redundant string artefacts
+                                if(strValue.indexOf("]") > 0){
+                                    strValue = strValue.substring(strValue.indexOf("]") + 1, strValue.length());
+                                }
+
+                                if(strValue.indexOf(";") > 0){
+                                    strValue = strValue.substring(0, strValue.indexOf(";"));
+                                }
+                                //
+
                                 jsonObject.put(headersList.get(cell.getColumnIndex()), strValue);
 
                             } else {
