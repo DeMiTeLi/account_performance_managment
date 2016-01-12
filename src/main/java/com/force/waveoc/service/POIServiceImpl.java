@@ -45,7 +45,11 @@ public class POIServiceImpl implements POIService {
         Row headersRow = sheet.getRow(rowStart);
         for (int cn = 0; cn < lastColumn; cn++) {
             Cell headerCell = headersRow.getCell(cn, Row.RETURN_BLANK_AS_NULL);
-            headersList.add(headerCell.getStringCellValue());
+            if (headerCell != null) {
+                headersList.add(headerCell.getStringCellValue());
+            } else {
+                headersList.add("");
+            }
         }
 
         for (int rowNum = rowStart + 1; rowNum <= rowEnd; rowNum++) {
